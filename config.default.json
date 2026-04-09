@@ -1,0 +1,10 @@
+{
+  "plan": "auto",
+  "bar_width": 20,
+  "codex": {
+    "session_token_limit": 100000
+  },
+  "gemini": {
+    "session_token_limit": 100000
+  }
+}
