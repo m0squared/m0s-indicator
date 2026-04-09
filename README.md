@@ -8,7 +8,7 @@
   ╚═╝  ╚═╝  ╚═════╝
 </pre>
 
-### **M0²** — M-zero-Squared
+### **M0²** 
 
 *Real-time token usage indicator for AI coding agents*
 
