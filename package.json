@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "M0² — Universal AI Agent Token Usage HUD for Claude Code, Codex CLI & Gemini CLI",
   "keywords": ["claude-code", "codex", "gemini", "ai", "token", "usage", "hud", "indicator", "m0squared"],
-  "author": "morius",
+  "author": {
+    "name": "haddad med",
+    "url": "https://github.com/m0squared"
+  },
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
