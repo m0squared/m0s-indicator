@@ -1,0 +1,5 @@
+token_indicator.py
+config.json
+.claude/
+*.sh
+scripts/
