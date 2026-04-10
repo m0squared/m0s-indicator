@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 272" width="560">
+
+  <!-- Card shadow -->
+  <rect x="2" y="4" width="556" height="266" rx="10" fill="#000000" opacity="0.4"/>
+
+  <!-- Card background -->
+  <rect x="0" y="0" width="556" height="266" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Header bar -->
+  <rect x="0" y="0" width="556" height="44" rx="10" fill="#161b22"/>
+  <rect x="0" y="30" width="556" height="14" fill="#161b22"/>
+  <line x1="0" y1="44" x2="556" y2="44" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Header icon + title -->
+  <text x="20" y="27"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12" fill="#8b949e" xml:space="preserve">⌘  Commands</text>
+
+  <!-- Column headers -->
+  <text x="20" y="62"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="10.5" fill="#6e7681" letter-spacing="0.5">COMMAND</text>
+  <text x="232" y="62"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="10.5" fill="#6e7681" letter-spacing="0.5">DESCRIPTION</text>
+
+  <line x1="0" y1="68" x2="556" y2="68" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Row 1 (alt bg) -->
+  <rect x="0" y="69" width="556" height="32" fill="#161b22"/>
+  <text x="20" y="89"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#c9d1d9" xml:space="preserve"><tspan fill="#58a6ff">install</tspan></text>
+  <line x1="215" y1="69" x2="215" y2="101" stroke="#21262d" stroke-width="1"/>
+  <text x="232" y="89"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#8b949e">install for all detected agents</text>
+
+  <!-- Row 2 -->
+  <rect x="0" y="101" width="556" height="32" fill="#0d1117"/>
+  <text x="20" y="121"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#c9d1d9" xml:space="preserve"><tspan fill="#58a6ff">install</tspan> --agent <tspan fill="#f0883e">claude-code</tspan></text>
+  <line x1="215" y1="101" x2="215" y2="133" stroke="#21262d" stroke-width="1"/>
+  <text x="232" y="121"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#8b949e">target a specific agent</text>
+
+  <!-- Row 3 (alt bg) -->
+  <rect x="0" y="133" width="556" height="32" fill="#161b22"/>
+  <text x="20" y="153"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#c9d1d9" xml:space="preserve"><tspan fill="#58a6ff">uninstall</tspan></text>
+  <line x1="215" y1="133" x2="215" y2="165" stroke="#21262d" stroke-width="1"/>
+  <text x="232" y="153"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#8b949e">remove from all agents</text>
+
+  <!-- Row 4 -->
+  <rect x="0" y="165" width="556" height="32" fill="#0d1117"/>
+  <text x="20" y="185"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#c9d1d9" xml:space="preserve"><tspan fill="#58a6ff">update</tspan></text>
+  <line x1="215" y1="165" x2="215" y2="197" stroke="#21262d" stroke-width="1"/>
+  <text x="232" y="185"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#8b949e">update to latest version</text>
+
+  <!-- Row 5 (alt bg) -->
+  <rect x="0" y="197" width="556" height="32" fill="#161b22"/>
+  <text x="20" y="217"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#c9d1d9" xml:space="preserve"><tspan fill="#58a6ff">agents</tspan></text>
+  <line x1="215" y1="197" x2="215" y2="229" stroke="#21262d" stroke-width="1"/>
+  <text x="232" y="217"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12.5" fill="#8b949e">list detected agents and status</text>
+
+  <!-- Bottom separator -->
+  <line x1="0" y1="229" x2="556" y2="229" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Footer hint -->
+  <rect x="0" y="229" width="556" height="37" rx="10" fill="#161b22"/>
+  <rect x="0" y="229" width="556" height="16" fill="#161b22"/>
+  <text x="278" y="252" text-anchor="middle"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="11" fill="#6e7681" xml:space="preserve">run with  <tspan fill="#3fb950">npx m0squared-indicator</tspan>  &lt;command&gt;</text>
+
+</svg>

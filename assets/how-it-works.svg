@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 234" width="580">
+
+  <!-- Shadow -->
+  <rect x="2" y="4" width="576" height="228" rx="12" fill="#000000" opacity="0.3"/>
+
+  <!-- Window -->
+  <rect x="0" y="0" width="576" height="228" rx="12" fill="#1a1b26"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="576" height="38" rx="12" fill="#16172a"/>
+  <rect x="0" y="22" width="576" height="16" fill="#16172a"/>
+  <line x1="0" y1="38" x2="576" y2="38" stroke="#2a2d3e" stroke-width="1"/>
+
+  <!-- Traffic lights -->
+  <circle cx="24" cy="19" r="6.5" fill="#ff5f57"/>
+  <circle cx="46" cy="19" r="6.5" fill="#febc2e"/>
+  <circle cx="68" cy="19" r="6.5" fill="#28c840"/>
+
+  <!-- Title -->
+  <text x="288" y="25" text-anchor="middle"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12" fill="#565f89">m0squared — install</text>
+
+  <!-- Prompt line -->
+  <text x="22" y="66"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#c0caf5" xml:space="preserve"><tspan fill="#9ece6a">$</tspan> m0squared-indicator install</text>
+
+  <!-- Scanning -->
+  <text x="22" y="94"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#565f89" xml:space="preserve">  Scanning for AI agents…</text>
+
+  <!-- claude-code: found — name in cyan, status in dim green -->
+  <text x="22" y="122"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#c0caf5" xml:space="preserve">  <tspan fill="#9ece6a">✓</tspan>  <tspan fill="#7dcfff">claude-code   </tspan>  <tspan fill="#565f89">detected</tspan></text>
+
+  <!-- codex: not found — all dim -->
+  <text x="22" y="142"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#565f89" xml:space="preserve">  ✗  codex            not found</text>
+
+  <!-- gemini: already installed — all dim -->
+  <text x="22" y="162"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#565f89" xml:space="preserve">  ⊘  gemini           already installed</text>
+
+  <!-- Separator -->
+  <line x1="22" y1="176" x2="554" y2="176" stroke="#2a2d3e" stroke-width="1"/>
+
+  <!-- Success -->
+  <text x="22" y="198"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#c0caf5" xml:space="preserve">  <tspan fill="#9ece6a">✓</tspan>  M0² installed successfully!</text>
+
+  <!-- Restart note -->
+  <text x="22" y="216"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12" fill="#565f89" xml:space="preserve">     Restart your agent to see the HUD.</text>
+
+</svg>

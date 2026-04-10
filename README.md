@@ -81,33 +81,17 @@ irm https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/insta
 
 M0² auto-detects which AI agents are installed on your machine and patches their config files silently. After a restart, the HUD appears automatically.
 
-```
-  M0²  v1.0.0  Universal AI Agent HUD
-  by morius
-
-  Scanning for AI agents…
-
-  ✓  Claude Code     detected
-  ✓  Codex CLI       detected
-  ✗  Gemini CLI      not found
-
-  Installing for: Claude Code, Codex CLI
-
-  ✓ M0² installed successfully!
-  Restart your agent to see the HUD.
-```
+<div align="center">
+<img src="./assets/how-it-works.svg" alt="M0² install flow" width="580">
+</div>
 
 ---
 
 ## Usage
 
-```bash
-m0squared-indicator install          # install for all detected agents
-m0squared-indicator install --agent claude-code   # target one agent
-m0squared-indicator uninstall        # remove from all agents
-m0squared-indicator update           # update to latest version
-m0squared-indicator agents           # list detected agents and status
-```
+<div align="center">
+<img src="./assets/usage.svg" alt="M0² commands" width="560">
+</div>
 
 ---
 
@@ -115,18 +99,9 @@ m0squared-indicator agents           # list detected agents and status
 
 After install, a config file is created at `~/.m0squared/config.json`:
 
-```json
-{
-  "plan": "auto",
-  "bar_width": 20,
-  "codex": {
-    "session_token_limit": 100000
-  },
-  "gemini": {
-    "session_token_limit": 100000
-  }
-}
-```
+<div align="center">
+<img src="./assets/config.svg" alt="M0² config.json" width="580">
+</div>
 
 | Key | Values | Description |
 |---|---|---|
