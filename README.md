@@ -1,14 +1,29 @@
 <div align="center">
 
 <pre>
-  ███╗   ███╗ ██████╗<sup>2</sup>
-  ████╗ ████║██╔═══██╗
-  ██╔████╔██║██║   ██║
-  ██║╚██╔╝██║╚██████╔╝
-  ╚═╝  ╚═╝  ╚═════╝
+╭──────────────────────────────────────────────────────────╮
+│  🔴 🟡 🟢                                               │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│    ███╗   ███╗ ██████╗ ══╗                              │
+│    ████╗ ████║██╔═══██╗╔═╝                              │
+│    ██╔████╔██║██║   ██║╚══   Universal AI Agent HUD     │
+│    ██║╚██╔╝██║╚██████╔╝      v1.0.1  by haddad med      │
+│    ╚═╝  ╚═╝  ╚═════╝                                   │
+│                                                          │
+│  $ npx m0squared-indicator install                       │
+│                                                          │
+│    ✓  claude-code    detected                           │
+│    ✓  codex          detected                           │
+│    ⊘  gemini         already installed                  │
+│                                                          │
+│    ✓ M0² installed successfully!                        │
+│      Restart your agent to see the HUD.                 │
+│                                                          │
+╰──────────────────────────────────────────────────────────╯
 </pre>
 
-### **M0²** 
+### **M0²**
 
 *Real-time token usage indicator for AI coding agents*
 
