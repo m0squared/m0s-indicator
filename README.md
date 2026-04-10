@@ -20,18 +20,15 @@
 
 ## What is M0²?
 
-**M0²** is a live HUD (Heads-Up Display) that sits inside your AI coding agent and shows you exactly how much of your token quota you've consumed — in real time, right where you work.
+**M0²** is a live HUD that sits inside your AI coding agent and shows you exactly how much of your token quota you've consumed — in real time, right where you work.
 
 No more getting cut off mid-task. No more opening dashboards. No more guessing.
 
 > *Start full. Watch it drain. Know when to stop.*
 
-```
-[Pro]  🔋 [████████░░░░░░░░░░░░] 42%  ↺ 3h 20m   📝 [████░░░░░░░░░░░] 18%
-[Max]  🔋 [████████░░░░░░░░░░░░] 42%  ↺ 3h 20m   📝 [████░░░░░░░░░░░] 18%
-[PAYG] 💸 $0.0241                                 📝 [███████░░░░░░░░] 33%
-[Free] 📝 [█░░░░░░░░░░░░░░░░░░░]  5%
-```
+<div align="center">
+<img src="./assets/demo.svg" alt="M0² HUD preview" width="620">
+</div>
 
 ---
 
