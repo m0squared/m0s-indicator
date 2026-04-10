@@ -46,38 +46,34 @@ No more getting cut off mid-task. No more opening dashboards. No more guessing.
 
 ## Install
 
+Pick your method — they all do the same thing.
+
+### npx *(recommended — no install needed)*
 ```bash
 npx m0squared-indicator install
 ```
 
-> No install needed — just run. Restart your agent to activate.
-
-<details>
-<summary>Other methods &nbsp;·&nbsp; npm &nbsp;·&nbsp; pip &nbsp;·&nbsp; curl &nbsp;·&nbsp; PowerShell</summary>
-
-<br>
-
-**npm**
+### npm
 ```bash
-npm install -g m0squared-indicator && m0squared-indicator install
+npm install -g m0squared-indicator
+m0squared-indicator install
 ```
 
-**pip**
+### pip
 ```bash
-pip install m0squared-indicator && m0squared-indicator install
+pip install m0squared-indicator
+m0squared-indicator install
 ```
 
-**curl** *(Linux / macOS)*
+### curl *(Linux / macOS)*
 ```bash
 curl -sSL https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.sh | bash
 ```
 
-**PowerShell** *(Windows)*
+### PowerShell *(Windows)*
 ```powershell
 irm https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.ps1 | iex
 ```
-
-</details>
 
 ---
 
