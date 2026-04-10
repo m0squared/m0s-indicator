@@ -1,6 +1,8 @@
 {
   "plan": "auto",
   "bar_width": 20,
+  "username": "",
+
   "codex": {
     "session_token_limit": 100000
   },
