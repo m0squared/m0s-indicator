@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/header.svg" alt="M0² — Universal AI Agent HUD" width="620">
+<img src="./assets/header.svg" alt="M0² — Universal AI Agent HUD" width="740">
 
 ### **M0²** — M-zero-Squared
 

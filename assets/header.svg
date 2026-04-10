@@ -1,61 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 210" width="620">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 190" width="740">
 
   <!-- Window shadow -->
-  <rect x="2" y="4" width="616" height="204" rx="12" fill="#000000" opacity="0.35"/>
+  <rect x="2" y="4" width="736" height="184" rx="12" fill="#000000" opacity="0.3"/>
 
   <!-- Window background -->
-  <rect x="0" y="0" width="616" height="204" rx="12" fill="#1a1b26"/>
+  <rect x="0" y="0" width="736" height="184" rx="12" fill="#1a1b26"/>
 
   <!-- Title bar -->
-  <rect x="0" y="0" width="616" height="40" rx="12" fill="#16172a"/>
-  <rect x="0" y="22" width="616" height="18" fill="#16172a"/>
+  <rect x="0" y="0" width="736" height="38" rx="12" fill="#16172a"/>
+  <rect x="0" y="22" width="736" height="16" fill="#16172a"/>
 
   <!-- Title bar bottom border -->
-  <line x1="0" y1="40" x2="616" y2="40" stroke="#2a2d3e" stroke-width="1"/>
+  <line x1="0" y1="38" x2="736" y2="38" stroke="#2a2d3e" stroke-width="1"/>
 
   <!-- Traffic light dots -->
-  <circle cx="24" cy="20" r="6.5" fill="#ff5f57"/>
-  <circle cx="46" cy="20" r="6.5" fill="#febc2e"/>
-  <circle cx="68" cy="20" r="6.5" fill="#28c840"/>
+  <circle cx="24" cy="19" r="6.5" fill="#ff5f57"/>
+  <circle cx="46" cy="19" r="6.5" fill="#febc2e"/>
+  <circle cx="68" cy="19" r="6.5" fill="#28c840"/>
 
   <!-- Window title -->
-  <text x="308" y="26" text-anchor="middle"
+  <text x="368" y="25" text-anchor="middle"
         font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
-        font-size="12" fill="#565f89">
-    ~/workspace — m0squared
-  </text>
+        font-size="12" fill="#565f89">~/workspace — m0squared</text>
 
-  <!-- Logo line 1: M0 in white, ══╗ in cyan -->
-  <text x="28" y="75"
+  <!--
+    Logo block centered: widest logo line is 25 chars at ~8.1px = ~203px
+    Center x = 368, so text-start-x = 368 - 203/2 ≈ 267
+  -->
+
+  <!-- Line 1: M0 white, ══╗ cyan -->
+  <text x="267" y="72"
         font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
         font-size="13.5" fill="#c0caf5" xml:space="preserve">  ███╗   ███╗ ██████╗<tspan fill="#7dcfff"> ══╗</tspan></text>
 
-  <!-- Logo line 2 -->
-  <text x="28" y="96"
+  <!-- Line 2: M0 white, ╔═╝ cyan -->
+  <text x="267" y="93"
         font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
         font-size="13.5" fill="#c0caf5" xml:space="preserve">  ████╗ ████║██╔═══██╗<tspan fill="#7dcfff">╔═╝</tspan></text>
 
-  <!-- Logo line 3 -->
-  <text x="28" y="117"
+  <!-- Line 3: M0 white, ╚══ cyan, then dim tagline (same line as CLI) -->
+  <text x="267" y="114"
         font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
-        font-size="13.5" fill="#c0caf5" xml:space="preserve">  ██╔████╔██║██║   ██║<tspan fill="#7dcfff">╚══</tspan></text>
+        font-size="13.5" fill="#c0caf5" xml:space="preserve">  ██╔████╔██║██║   ██║<tspan fill="#7dcfff">╚══</tspan><tspan fill="#565f89">  Universal AI Agent HUD</tspan></text>
 
-  <!-- Logo line 4 -->
-  <text x="28" y="138"
+  <!-- Line 4: M0 white, then dim version line (same line as CLI) -->
+  <text x="267" y="135"
         font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
-        font-size="13.5" fill="#c0caf5" xml:space="preserve">  ██║╚██╔╝██║╚██████╔╝</text>
+        font-size="13.5" fill="#c0caf5" xml:space="preserve">  ██║╚██╔╝██║╚██████╔╝<tspan fill="#565f89">      v1.0.1  by haddad med</tspan></text>
 
-  <!-- Logo line 5 -->
-  <text x="28" y="159"
+  <!-- Line 5: bottom of logo -->
+  <text x="267" y="156"
         font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
         font-size="13.5" fill="#c0caf5" xml:space="preserve">  ╚═╝  ╚═╝  ╚═════╝</text>
-
-  <!-- Tagline separator -->
-  <line x1="28" y1="171" x2="588" y2="171" stroke="#2a2d3e" stroke-width="1"/>
-
-  <!-- Tagline -->
-  <text x="28" y="190"
-        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
-        font-size="12" fill="#565f89" xml:space="preserve">  Universal AI Agent HUD  ·  v1.0.1  ·  by haddad med</text>
 
 </svg>
