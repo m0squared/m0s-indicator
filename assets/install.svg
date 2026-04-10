@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 232" width="600">
+
+  <!-- Shadow -->
+  <rect x="2" y="4" width="596" height="226" rx="12" fill="#000000" opacity="0.3"/>
+
+  <!-- Window -->
+  <rect x="0" y="0" width="596" height="226" rx="12" fill="#1a1b26"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="596" height="38" rx="12" fill="#16172a"/>
+  <rect x="0" y="22" width="596" height="16" fill="#16172a"/>
+  <line x1="0" y1="38" x2="596" y2="38" stroke="#2a2d3e" stroke-width="1"/>
+
+  <!-- Traffic lights -->
+  <circle cx="24" cy="19" r="6.5" fill="#ff5f57"/>
+  <circle cx="46" cy="19" r="6.5" fill="#febc2e"/>
+  <circle cx="68" cy="19" r="6.5" fill="#28c840"/>
+
+  <!-- Title -->
+  <text x="298" y="25" text-anchor="middle"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12" fill="#565f89">install m0squared</text>
+
+  <!-- ── Recommended highlight background ── -->
+  <rect x="12" y="46" width="572" height="28" rx="6" fill="#1f2335"/>
+
+  <!-- Primary command: ❯ in green, npx in cyan, rest in white -->
+  <text x="22" y="65"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13.5" fill="#c0caf5" xml:space="preserve"><tspan fill="#9ece6a">❯</tspan> <tspan fill="#7dcfff">npx</tspan> m0squared-indicator install</text>
+
+  <!-- "recommended" label right-aligned -->
+  <text x="578" y="65" text-anchor="end"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="11" fill="#565f89">← recommended</text>
+
+  <!-- Separator -->
+  <line x1="22" y1="84" x2="574" y2="84" stroke="#2a2d3e" stroke-width="1"/>
+  <text x="298" y="80" text-anchor="middle"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="11" fill="#2a2d3e">───────────── or ─────────────</text>
+
+  <!-- npm -->
+  <text x="22" y="106"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#c0caf5" xml:space="preserve"><tspan fill="#f7768e">npm </tspan>  npm install -g m0squared-indicator</text>
+
+  <!-- pip -->
+  <text x="22" y="128"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#c0caf5" xml:space="preserve"><tspan fill="#7aa2f7">pip </tspan>  pip install m0squared-indicator</text>
+
+  <!-- curl -->
+  <text x="22" y="150"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#c0caf5" xml:space="preserve"><tspan fill="#e0af68">curl</tspan>  curl -sSL https://…/install.sh | bash<tspan fill="#565f89">  # Linux/macOS</tspan></text>
+
+  <!-- pwsh -->
+  <text x="22" y="172"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="13" fill="#c0caf5" xml:space="preserve"><tspan fill="#bb9af7">pwsh</tspan>  irm  https://…/install.ps1 | iex<tspan fill="#565f89">     # Windows</tspan></text>
+
+  <!-- Bottom separator -->
+  <line x1="22" y1="186" x2="574" y2="186" stroke="#2a2d3e" stroke-width="1"/>
+
+  <!-- Restart note -->
+  <text x="22" y="208"
+        font-family="'SF Mono','Monaco','Cascadia Code','Fira Code',monospace"
+        font-size="12" fill="#565f89" xml:space="preserve">  <tspan fill="#9ece6a">↳</tspan>  restart your agent after install to activate the HUD</text>
+
+</svg>
