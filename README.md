@@ -1,14 +1,6 @@
 <div align="center">
 
-<pre>
-  ███╗   ███╗ ██████╗ ══╗
-  ████╗ ████║██╔═══██╗╔═╝
-  ██╔████╔██║██║   ██║╚══
-  ██║╚██╔╝██║╚██████╔╝
-  ╚═╝  ╚═╝  ╚═════╝
-
-  Universal AI Agent HUD  ·  v1.0.1  ·  by haddad med
-</pre>
+<img src="./assets/header.svg" alt="M0² — Universal AI Agent HUD" width="620">
 
 ### **M0²** — M-zero-Squared
 

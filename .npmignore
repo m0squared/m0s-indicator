@@ -3,3 +3,4 @@ config.json
 .claude/
 *.sh
 scripts/
+assets/
