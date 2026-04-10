@@ -46,15 +46,38 @@ No more getting cut off mid-task. No more opening dashboards. No more guessing.
 
 ## Install
 
-<div align="center">
-<img src="./assets/install.svg" alt="install m0squared" width="600">
-</div>
+```bash
+npx m0squared-indicator install
+```
 
-Full URLs for curl / PowerShell:
+> No install needed — just run. Restart your agent to activate.
+
+<details>
+<summary>Other methods &nbsp;·&nbsp; npm &nbsp;·&nbsp; pip &nbsp;·&nbsp; curl &nbsp;·&nbsp; PowerShell</summary>
+
+<br>
+
+**npm**
+```bash
+npm install -g m0squared-indicator && m0squared-indicator install
 ```
-curl:  https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.sh
-pwsh:  https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.ps1
+
+**pip**
+```bash
+pip install m0squared-indicator && m0squared-indicator install
 ```
+
+**curl** *(Linux / macOS)*
+```bash
+curl -sSL https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.sh | bash
+```
+
+**PowerShell** *(Windows)*
+```powershell
+irm https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.ps1 | iex
+```
+
+</details>
 
 ---
 
