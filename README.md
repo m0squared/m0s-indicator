@@ -1,180 +1,144 @@
 <div align="center">
 
 <pre>
-╭──────────────────────────────────────────────────────────╮
-│  🔴 🟡 🟢                                               │
-├──────────────────────────────────────────────────────────┤
-│                                                          │
-│    ███╗   ███╗ ██████╗ ══╗                              │
-│    ████╗ ████║██╔═══██╗╔═╝                              │
-│    ██╔████╔██║██║   ██║╚══   Universal AI Agent HUD     │
-│    ██║╚██╔╝██║╚██████╔╝      v1.0.1  by haddad med      │
-│    ╚═╝  ╚═╝  ╚═════╝                                   │
-│                                                          │
-│  $ npx m0squared-indicator install                       │
-│                                                          │
-│    ✓  claude-code    detected                           │
-│    ✓  codex          detected                           │
-│    ⊘  gemini         already installed                  │
-│                                                          │
-│    ✓ M0² installed successfully!                        │
-│      Restart your agent to see the HUD.                 │
-│                                                          │
-╰──────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────────╮
+│  🔴 🟡 🟢   ~/workspace — claude-code                       │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│    ███╗   ███╗ ██████╗ ══╗                                  │
+│    ████╗ ████║██╔═══██╗╔═╝                                  │
+│    ██╔████╔██║██║   ██║╚══   Universal AI Agent HUD         │
+│    ██║╚██╔╝██║╚██████╔╝      v1.0.1  by haddad med          │
+│    ╚═╝  ╚═╝  ╚═════╝                                       │
+│                                                              │
+├────────────────────────────── HUD preview ───────────────────┤
+│                                                              │
+│  [Pro]  claude-sonnet-4-5                      haddad med    │
+│  Quota  [████████████░░░░░░░░] 62%  1h 40m / 5h  ↺ 3h 20m  │
+│         [████░░░░░░░░░░░░░░░░] 18%  Ctx                     │
+│                                                              │
+╰──────────────────────────────────────────────────────────────╯
 </pre>
 
-### **M0²**
+**Real-time token usage HUD for AI coding agents.**
 
-*Real-time token usage indicator for AI coding agents*
+[![npm](https://img.shields.io/npm/v/m0squared-indicator?color=00d4ff&label=npm&labelColor=0d1117&style=flat-square)](https://www.npmjs.com/package/m0squared-indicator)
+[![downloads](https://img.shields.io/npm/dm/m0squared-indicator?color=00d4ff&label=downloads&labelColor=0d1117&style=flat-square)](https://www.npmjs.com/package/m0squared-indicator)
+[![license](https://img.shields.io/badge/license-personal%20use-f59e0b?labelColor=0d1117&style=flat-square)](#license)
+[![built with Claude Code](https://img.shields.io/badge/built%20with-Claude%20Code-7c3aed?labelColor=0d1117&style=flat-square)](https://claude.ai/code)
 
----
-
-[![npm](https://img.shields.io/npm/v/m0squared-indicator?color=cyan&label=npm)](https://www.npmjs.com/package/m0squared-indicator)
-[![npm downloads](https://img.shields.io/npm/dm/m0squared-indicator?color=cyan)](https://www.npmjs.com/package/m0squared-indicator)
-[![license](https://img.shields.io/badge/license-Personal%20Use-yellow)](#license)
-[![made with love](https://img.shields.io/badge/made%20with-%E2%9D%A4-red)](https://github.com/m0squared/m0s-indicator)
-[![built by a Claude Code lover](https://img.shields.io/badge/built%20by-Claude%20Code%20lover-blueviolet)](https://claude.ai/code)
+```bash
+npx m0squared-indicator install
+```
 
 </div>
 
 ---
 
-## What is M0²?
-
-**M0²** is a live HUD (Heads-Up Display) that sits inside your AI coding agent and shows you exactly how much of your token quota you've consumed — in real time, right where you work.
-
-No more getting cut off mid-task. No more opening dashboards. No more guessing.
+M0² installs a live HUD into your AI coding agent — quota remaining, context window usage, cost, and reset timer. Updated after every response. No dashboard. No guessing.
 
 > *Start full. Watch it drain. Know when to stop.*
 
-```
-[Pro]  🔋 [████████░░░░░░░░░░░░] 42%  ↺ 3h 20m   📝 [████░░░░░░░░░░░] 18%
-[Max]  🔋 [████████░░░░░░░░░░░░] 42%  ↺ 3h 20m   📝 [████░░░░░░░░░░░] 18%
-[PAYG] 💸 $0.0241                                 📝 [███████░░░░░░░░] 33%
-[Free] 📝 [█░░░░░░░░░░░░░░░░░░░]  5%
-```
+---
+
+## The HUD
+
+<pre>
+  <b>── Pro · Max ─────────────────────────────────────────────</b>
+
+  [Pro]  claude-sonnet-4-5                          haddad med
+  Quota  [████████████░░░░░░░░] 62%  1h 40m / 5h 00m  ↺ 3h 20m
+         [████░░░░░░░░░░░░░░░░] 18%  Ctx
+
+  <b>── PAYG (API key) ────────────────────────────────────────</b>
+
+  [PAYG]  claude-opus-4-5
+  Cost  $0.0241  │  Ctx  [████████░░░░░░░░░░░░] 33%
+
+  <b>── Free ──────────────────────────────────────────────────</b>
+
+  [Free]  Ctx  [████░░░░░░░░░░░░░░░░░░░░] 14%
+</pre>
+
+**Quota** starts full and drains as your 5-hour limit is consumed.  
+**Ctx** starts empty and fills as the conversation grows.  
+Colors shift **green → yellow → red** as limits approach.
 
 ---
 
-## Supported Agents
+## Agents
 
-| Agent | Status | Integration |
-|---|---|---|
-| **Claude Code** | ✅ Full support | Native `statusLine` hook — live in the status bar |
-| **Codex CLI** | ✅ Supported | `PostToolUse` hook — tracks every response |
-| **Gemini CLI** | ✅ Supported | `AfterTool` hook — tracks every response |
-
-> More agents coming. PRs welcome.
+| Agent | Integration |
+|---|---|
+| **Claude Code** | Native `statusLine` hook — live in the status bar |
+| **Codex CLI** | `PostToolUse` hook — tracks every tool call |
+| **Gemini CLI** | `AfterTool` hook — tracks every response |
 
 ---
 
 ## Install
 
-Pick your method — they all do the same thing.
-
-### npx *(recommended — no install needed)*
 ```bash
+# recommended — no install needed, just run
 npx m0squared-indicator install
-```
 
-### npm
-```bash
-npm install -g m0squared-indicator
-m0squared-indicator install
-```
+# npm
+npm install -g m0squared-indicator && m0squared-indicator install
 
-### pip
-```bash
-pip install m0squared-indicator
-m0squared-indicator install
-```
+# pip
+pip install m0squared-indicator && m0squared-indicator install
 
-### curl *(Linux / macOS)*
-```bash
+# curl (Linux / macOS)
 curl -sSL https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.sh | bash
-```
 
-### PowerShell *(Windows)*
-```powershell
+# PowerShell (Windows)
 irm https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.ps1 | iex
 ```
 
----
-
-## How it works
-
-M0² auto-detects which AI agents are installed on your machine and patches their config files silently. After a restart, the HUD appears automatically.
-
-```
-  M0²  v1.0.0  Universal AI Agent HUD
-  by morius
-
-  Scanning for AI agents…
-
-  ✓  Claude Code     detected
-  ✓  Codex CLI       detected
-  ✗  Gemini CLI      not found
-
-  Installing for: Claude Code, Codex CLI
-
-  ✓ M0² installed successfully!
-  Restart your agent to see the HUD.
-```
+Restart your agent after install to activate the HUD.
 
 ---
 
-## Usage
+## Configure
 
-```bash
-m0squared-indicator install          # install for all detected agents
-m0squared-indicator install --agent claude-code   # target one agent
-m0squared-indicator uninstall        # remove from all agents
-m0squared-indicator update           # update to latest version
-m0squared-indicator agents           # list detected agents and status
-```
-
----
-
-## Configuration
-
-After install, a config file is created at `~/.m0squared/config.json`:
+Config file at `~/.m0squared/config.json` — created automatically on first install:
 
 ```json
 {
-  "plan": "auto",
-  "bar_width": 20,
-  "codex": {
-    "session_token_limit": 100000
-  },
-  "gemini": {
-    "session_token_limit": 100000
-  }
+  "plan":      "auto",
+  "bar_width":  20,
+  "username":   "",
+  "codex":  { "session_token_limit": 100000 },
+  "gemini": { "session_token_limit": 100000 }
 }
 ```
 
-| Key | Values | Description |
+| Key | Values | Default |
 |---|---|---|
-| `plan` | `auto` `pro` `max` `payg` `free` | Override plan auto-detection |
-| `bar_width` | number | Width of the progress bar (default: 20) |
-| `*.session_token_limit` | number | Token limit for Codex / Gemini sessions |
+| `plan` | `auto` `pro` `max` `payg` `free` | `auto` |
+| `bar_width` | integer | `20` |
+| `username` | string | system `$USER` |
 
-> **Auto-detection:** Claude Code Pro/Max is detected automatically via the `rate_limits` field. Set `"plan": "max"` manually if you're on Max.
+Plan is auto-detected from the agent's live response data. Set `"plan": "max"` manually if you're on Max.
 
 ---
 
-## Uninstall
+## Commands
 
-```bash
-npx m0squared-indicator uninstall
 ```
-
-This removes all hooks from your agent configs and deletes `~/.m0squared/`.
+m0squared-indicator install             install for all detected agents
+m0squared-indicator install --agent X   target one agent (claude-code, codex, gemini)
+m0squared-indicator uninstall           remove from all agents
+m0squared-indicator update              update to latest version
+m0squared-indicator agents              list detected agents and status
+m0squared-indicator status              print current HUD output
+```
 
 ---
 
 ## Why M0²?
 
-Built out of pure love for [Claude Code](https://claude.ai/code) — and frustration with hitting token limits mid-session without any warning.
+Built out of frustration — hitting the Claude Code token limit mid-session, with zero warning and no way to know how close you were.
 
 M0² was born from a simple idea: *your tools should tell you when you're running out of fuel.*
 
