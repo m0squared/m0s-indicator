@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/header.svg" alt="M0² — Universal AI Agent HUD" width="740">
+<img src="https://github.com/m0squared/m0s-indicator/raw/main/assets/header.svg" alt="M0² — Universal AI Agent HUD" width="740">
 
 ### **M0²** — M-zero-Squared
 
@@ -27,7 +27,7 @@ No more getting cut off mid-task. No more opening dashboards. No more guessing.
 > *Start full. Watch it drain. Know when to stop.*
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/demo.svg" alt="M0² HUD preview" width="620">
+<img src="https://github.com/m0squared/m0s-indicator/raw/main/assets/demo.svg" alt="M0² HUD preview" width="620">
 </div>
 
 ---
@@ -82,7 +82,7 @@ irm https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/insta
 M0² auto-detects which AI agents are installed on your machine and patches their config files silently. After a restart, the HUD appears automatically.
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/how-it-works.svg" alt="M0² install flow" width="580">
+<img src="https://github.com/m0squared/m0s-indicator/raw/main/assets/how-it-works.svg" alt="M0² install flow" width="580">
 </div>
 
 ---
@@ -90,7 +90,7 @@ M0² auto-detects which AI agents are installed on your machine and patches thei
 ## Usage
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/usage.svg" alt="M0² commands" width="560">
+<img src="https://github.com/m0squared/m0s-indicator/raw/main/assets/usage.svg" alt="M0² commands" width="560">
 </div>
 
 ---
@@ -100,7 +100,7 @@ M0² auto-detects which AI agents are installed on your machine and patches thei
 After install, a config file is created at `~/.m0squared/config.json`:
 
 <div align="center">
-<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/config.svg" alt="M0² config.json" width="580">
+<img src="https://github.com/m0squared/m0s-indicator/raw/main/assets/config.svg" alt="M0² config.json" width="580">
 </div>
 
 | Key | Values | Description |
