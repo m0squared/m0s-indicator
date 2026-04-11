@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/header.svg" alt="M0² — Universal AI Agent HUD" width="740">
+<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/header.svg" alt="M0² — Universal AI Agent HUD" width="740">
 
 ### **M0²** — M-zero-Squared
 
@@ -10,7 +10,7 @@
 
 [![npm](https://img.shields.io/npm/v/m0squared-indicator?color=cyan&label=npm)](https://www.npmjs.com/package/m0squared-indicator)
 [![npm downloads](https://img.shields.io/npm/dm/m0squared-indicator?color=cyan)](https://www.npmjs.com/package/m0squared-indicator)
-[![license](https://img.shields.io/badge/license-Personal%20Use-yellow)](#license)
+[![license](https://img.shields.io/badge/license-MIT-green)](#license)
 [![made with love](https://img.shields.io/badge/made%20with-%E2%9D%A4-red)](https://github.com/m0squared/m0s-indicator)
 [![built by a Claude Code lover](https://img.shields.io/badge/built%20by-Claude%20Code%20lover-blueviolet)](https://claude.ai/code)
 
@@ -27,7 +27,7 @@ No more getting cut off mid-task. No more opening dashboards. No more guessing.
 > *Start full. Watch it drain. Know when to stop.*
 
 <div align="center">
-<img src="./assets/demo.svg" alt="M0² HUD preview" width="620">
+<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/demo.svg" alt="M0² HUD preview" width="620">
 </div>
 
 ---
@@ -82,7 +82,7 @@ irm https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/insta
 M0² auto-detects which AI agents are installed on your machine and patches their config files silently. After a restart, the HUD appears automatically.
 
 <div align="center">
-<img src="./assets/how-it-works.svg" alt="M0² install flow" width="580">
+<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/how-it-works.svg" alt="M0² install flow" width="580">
 </div>
 
 ---
@@ -90,7 +90,7 @@ M0² auto-detects which AI agents are installed on your machine and patches thei
 ## Usage
 
 <div align="center">
-<img src="./assets/usage.svg" alt="M0² commands" width="560">
+<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/usage.svg" alt="M0² commands" width="560">
 </div>
 
 ---
@@ -100,7 +100,7 @@ M0² auto-detects which AI agents are installed on your machine and patches thei
 After install, a config file is created at `~/.m0squared/config.json`:
 
 <div align="center">
-<img src="./assets/config.svg" alt="M0² config.json" width="580">
+<img src="https://raw.githubusercontent.com/m0squared/m0s-indicator/main/assets/config.svg" alt="M0² config.json" width="580">
 </div>
 
 | Key | Values | Description |
@@ -136,9 +136,8 @@ M0² was born from a simple idea: *your tools should tell you when you're runnin
 
 ## License
 
-© 2026 morius (M-zero-Squared / haddad med). All rights reserved.
+MIT © 2026 [morius (M-zero-Squared / haddad med)](https://github.com/m0squared)
 
-Free for personal use. No redistribution or commercial use without written permission.  
 See [LICENSE](./LICENSE) for full terms.
 
 ---
