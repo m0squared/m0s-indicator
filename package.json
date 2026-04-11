@@ -1,6 +1,6 @@
 {
   "name": "m0squared-indicator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "M0² — Universal AI Agent Token Usage HUD for Claude Code, Codex CLI & Gemini CLI",
   "keywords": [
     "claude-code",
