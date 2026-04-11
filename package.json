@@ -1,5 +1,5 @@
 {
-  "name": "m0s-indicator",
+  "name": "m0squared-indicator",
   "version": "1.0.1",
   "description": "M0² — Universal AI Agent Token Usage HUD for Claude Code, Codex CLI & Gemini CLI",
   "keywords": ["claude-code", "codex", "gemini", "ai", "token", "usage", "hud", "indicator", "m0squared"],
@@ -17,7 +17,7 @@
     "url": "https://github.com/m0squared/m0s-indicator/issues"
   },
   "bin": {
-    "m0s-indicator": "./bin/cli.js"
+    "m0squared-indicator": "./bin/cli.js"
   },
   "files": [
     "bin",
