@@ -124,7 +124,7 @@ def render(data: dict, config: dict) -> None:
     username   = get_username(config)
     model_name = model_info.get("display_name") or model_info.get("id", "")
 
-    # ── Identity segment: "Sonnet 4.6 · PAYG · alice" ────────────────────
+    # ── Identity segment: "Sonnet 4.6 · Pro · alice" ─────────────────────
     id_parts = []
 
     if agent != "claude-code":
