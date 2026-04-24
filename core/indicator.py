@@ -24,6 +24,7 @@ BOLD   = "\033[1m"
 DIM    = "\033[2m"
 RESET  = "\033[0m"
 SEP    = f"  {DIM}│{RESET}  "
+DOT    = f"  {DIM}·{RESET}  "
 
 # ── Config ────────────────────────────────────────────────────────────────────
 
@@ -123,24 +124,22 @@ def render(data: dict, config: dict) -> None:
     username   = get_username(config)
     model_name = model_info.get("display_name") or model_info.get("id", "")
 
-    # ── Line 1: identity row ──────────────────────────────────────────────
-    id_left = []
+    # ── Identity segment: "Sonnet 4.6 · PAYG · alice" ────────────────────
+    id_parts = []
 
     if agent != "claude-code":
-        id_left.append(AGENT_BADGES.get(agent, agent))
-
-    id_left.append(badge(plan))
+        id_parts.append(AGENT_BADGES.get(agent, agent))
 
     if model_name:
-        id_left.append(f"{DIM}{model_name}{RESET}")
+        id_parts.append(f"{DIM}{model_name}{RESET}")
 
-    id_right = f"{DIM}{username}{RESET}" if username else ""
+    c, label = BADGES.get(plan, (DIM, plan.upper()))
+    id_parts.append(f"{BOLD}{c}{label}{RESET}")
 
-    line1_left  = "  ".join(id_left)
-    line1 = f"{line1_left}   {id_right}".rstrip()
+    if username:
+        id_parts.append(f"{DIM}{username}{RESET}")
 
-    # ── Line 2: bars row ──────────────────────────────────────────────────
-    bar_parts = []
+    parts = [DOT.join(id_parts)]
 
     # ── Subscription quota bar (starts FULL, drains to empty) ────────────
     if plan in ("pro", "max") and rate:
@@ -155,7 +154,7 @@ def render(data: dict, config: dict) -> None:
         p  = fmt_pct(remaining_pct)
 
         time_str  = time_used_of_window(resets_at) if resets_at else ""
-        reset_str = f"{DIM}↺ {time_until(resets_at)}{RESET}"  if resets_at else ""
+        reset_str = f"{DIM}↺ {time_until(resets_at)}{RESET}" if resets_at else ""
 
         quota_line = f"Quota {c}{b} {p}{RESET}"
         if time_str:
@@ -163,12 +162,12 @@ def render(data: dict, config: dict) -> None:
         if reset_str:
             quota_line += f"  {reset_str}"
 
-        bar_parts.append(quota_line)
+        parts.append(quota_line)
 
     # ── PAYG cost ─────────────────────────────────────────────────────────
     elif plan == "payg":
         usd = float(cost_obj.get("total_cost_usd", 0) or 0)
-        bar_parts.append(f"Cost {YELLOW}${usd:.4f}{RESET}")
+        parts.append(f"Cost {YELLOW}${usd:.4f}{RESET}")
 
     # ── Context window bar (starts EMPTY, fills as conversation grows) ────
     ctx_pct = ctx.get("used_percentage")
@@ -176,18 +175,9 @@ def render(data: dict, config: dict) -> None:
         c = color_used(ctx_pct)
         b = bar(ctx_pct, max(10, int(width * 0.75)))
         p = fmt_pct(ctx_pct)
-        bar_parts.append(f"Ctx {c}{b} {p}{RESET}")
+        parts.append(f"Ctx {c}{b} {p}{RESET}")
 
-    line2 = SEP.join(bar_parts)
-
-    # ── Output ────────────────────────────────────────────────────────────
-    output = []
-    if line1.strip():
-        output.append(line1)
-    if line2.strip():
-        output.append(line2)
-
-    print("\n".join(output))
+    print(SEP.join(parts))
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
