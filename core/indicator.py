@@ -257,7 +257,8 @@ def render(data: dict, config: dict) -> None:
     line1 = f"{'  '.join(id_left)}   {id_right}".rstrip()
     line2 = SEP.join(bars)
 
-    print("\n".join(l for l in (line1, line2) if l.strip()))
+    # Blank line between the two rows for a little breathing room.
+    print("\n\n".join(l for l in (line1, line2) if l.strip()))
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
