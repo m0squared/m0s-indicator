@@ -153,14 +153,23 @@ def get_effort(data: dict, settings: dict) -> str:
 
 # ── Render ────────────────────────────────────────────────────────────────────
 
-def build_bars(plan: str, rate, cost_obj: dict, ctx: dict, width: int) -> list[str]:
+def quota_time_block(rate) -> str:
+    """'1h 52m / 5h 00m  ↺ 3h 07m' — window elapsed + time until reset."""
+    five      = (rate or {}).get("five_hour", {})
+    resets_at = five.get("resets_at")
+    if not resets_at:
+        return ""
+    return (f"{DIM}{time_used_of_window(resets_at)}{RESET}"
+            f"  {DIM}↺ {time_until(resets_at)}{RESET}")
+
+def build_bars(plan: str, rate, cost_obj: dict, ctx: dict, width: int,
+               with_time: bool = True) -> list[str]:
     bars = []
 
     # ── Subscription quota bar (starts FULL, drains to empty) ────────────
     if plan in ("pro", "max") and rate:
         five       = rate.get("five_hour", {})
         used_pct   = five.get("used_percentage")
-        resets_at  = five.get("resets_at")
 
         remaining_pct = (100.0 - used_pct) if used_pct is not None else None
 
@@ -168,14 +177,11 @@ def build_bars(plan: str, rate, cost_obj: dict, ctx: dict, width: int) -> list[s
         b  = bar(remaining_pct, width)
         p  = fmt_pct(remaining_pct)
 
-        time_str  = time_used_of_window(resets_at) if resets_at else ""
-        reset_str = f"{DIM}↺ {time_until(resets_at)}{RESET}" if resets_at else ""
-
         quota_line = f"Quota {c}{b} {p}{RESET}"
-        if time_str:
-            quota_line += f"  {DIM}{time_str}{RESET}"
-        if reset_str:
-            quota_line += f"  {reset_str}"
+        if with_time:
+            tb = quota_time_block(rate)
+            if tb:
+                quota_line += f"  {tb}"
         bars.append(quota_line)
 
     # ── PAYG cost ─────────────────────────────────────────────────────────
@@ -220,10 +226,9 @@ def render(data: dict, config: dict) -> None:
         if effort:
             model_seg += f" {DIM}({effort}){RESET}"
 
-    bars = build_bars(plan, rate, cost_obj, ctx, width)
-
-    # ── Inline: single dot/pipe-separated line ───────────────────────────
+    # ── Inline: single dot/pipe-separated line (time stays on the bar) ───
     if layout == "inline":
+        bars = build_bars(plan, rate, cost_obj, ctx, width, with_time=True)
         id_parts = []
         if not is_claude:
             id_parts.append(AGENT_BADGES.get(agent, agent))
@@ -237,7 +242,8 @@ def render(data: dict, config: dict) -> None:
         print(SEP.join([DOT.join(id_parts), *bars]))
         return
 
-    # ── Rows (default): identity row + bars row ──────────────────────────
+    # ── Rows (default): identity + window time on line 1, bars on line 2 ─
+    bars = build_bars(plan, rate, cost_obj, ctx, width, with_time=False)
     id_left = []
     if not is_claude:
         id_left.append(AGENT_BADGES.get(agent, agent))
@@ -245,7 +251,9 @@ def render(data: dict, config: dict) -> None:
     if model_seg:
         id_left.append(model_seg)
 
-    id_right = f"{DIM}{ident}{RESET}" if ident else ""
+    # Right side: quota window time (Pro/Max), else fall back to email/username.
+    time_block = quota_time_block(rate) if plan in ("pro", "max") else ""
+    id_right = time_block or (f"{DIM}{ident}{RESET}" if ident else "")
     line1 = f"{'  '.join(id_left)}   {id_right}".rstrip()
     line2 = SEP.join(bars)
 
