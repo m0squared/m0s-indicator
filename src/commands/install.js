@@ -3,9 +3,44 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const readline = require('readline');
 
 const ui = require('../ui');
 const { detectAll, getInstallDir } = require('../detect');
+
+// Ask the user once which HUD layout they want. Falls back to "rows" when
+// there's no TTY (e.g. the global-install postinstall hook).
+function promptLayout() {
+  return new Promise((resolve) => {
+    if (!process.stdin.isTTY || !process.stdout.isTTY) return resolve('rows');
+
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+    ui.section('Choose HUD layout:\n');
+    console.log(`    ${ui.CYAN}1${ui.R}  rows    ${ui.DIM}identity on one line, bars on the next (default)${ui.R}`);
+    console.log(`    ${ui.CYAN}2${ui.R}  inline  ${ui.DIM}everything on a single compact line${ui.R}\n`);
+    rl.question(`  ${ui.DIM}Select [1/2] (default 1): ${ui.R}`, (answer) => {
+      rl.close();
+      const a = (answer || '').trim().toLowerCase();
+      resolve(a === '2' || a === 'inline' ? 'inline' : 'rows');
+    });
+  });
+}
+
+// Merge a chosen layout into the installed config.json without clobbering
+// any other user edits.
+function writeLayout(installDir, layout) {
+  const configDst = path.join(installDir, 'config.json');
+  let cfg = {};
+  if (fs.existsSync(configDst)) {
+    try { cfg = JSON.parse(fs.readFileSync(configDst, 'utf8')); } catch { cfg = {}; }
+  } else {
+    try {
+      cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '../../config.default.json'), 'utf8'));
+    } catch { cfg = {}; }
+  }
+  cfg.layout = layout;
+  fs.writeFileSync(configDst, JSON.stringify(cfg, null, 2) + '\n');
+}
 
 const AGENTS = {
   'claude-code': require('../agents/claude-code'),
@@ -80,6 +115,11 @@ module.exports = async function install(opts = {}) {
     const configSrc = path.join(__dirname, '../../config.default.json');
     fs.copyFileSync(configSrc, configDst);
   }
+
+  // Let the user pick their HUD layout, then persist it into config.json.
+  console.log();
+  const layout = await promptLayout();
+  writeLayout(installDir, layout);
 
   // Install per agent
   console.log();

@@ -1,7 +1,11 @@
 {
   "plan": "auto",
+  "layout": "rows",
   "bar_width": 20,
   "username": "",
+  "email": "",
+  "show_email": true,
+  "show_effort": true,
 
   "codex": {
     "session_token_limit": 100000
