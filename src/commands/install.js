@@ -16,16 +16,12 @@ function promptLayout() {
 
     const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
     ui.section('Choose HUD layout:\n');
-    console.log(`    ${ui.CYAN}1${ui.R}  rows     ${ui.DIM}identity line, then quota + context together (default)${ui.R}`);
-    console.log(`    ${ui.CYAN}2${ui.R}  inline   ${ui.DIM}everything on a single compact line${ui.R}`);
-    console.log(`    ${ui.CYAN}3${ui.R}  stacked  ${ui.DIM}identity, quota and context each on its own row${ui.R}\n`);
-    rl.question(`  ${ui.DIM}Select [1/2/3] (default 1): ${ui.R}`, (answer) => {
+    console.log(`    ${ui.CYAN}1${ui.R}  rows    ${ui.DIM}identity on one line, bars on the next (default)${ui.R}`);
+    console.log(`    ${ui.CYAN}2${ui.R}  inline  ${ui.DIM}everything on a single compact line${ui.R}\n`);
+    rl.question(`  ${ui.DIM}Select [1/2] (default 1): ${ui.R}`, (answer) => {
       rl.close();
       const a = (answer || '').trim().toLowerCase();
-      const layout = (a === '2' || a === 'inline') ? 'inline'
-                   : (a === '3' || a === 'stacked') ? 'stacked'
-                   : 'rows';
-      resolve(layout);
+      resolve(a === '2' || a === 'inline' ? 'inline' : 'rows');
     });
   });
 }

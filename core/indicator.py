@@ -6,9 +6,8 @@ M0² — Universal AI Agent HUD
 Reads JSON from Claude Code's statusLine hook (stdin) or state files (Codex/Gemini).
 
 Layouts (config "layout"):
-  "rows"    — two lines: identity row, then quota + context together   (default)
-  "inline"  — single dot/pipe-separated line
-  "stacked" — identity, quota and context each on their own row
+  "rows"   — two lines: identity row + bars row   (default)
+  "inline" — single dot/pipe-separated line
 """
 
 import json
@@ -238,7 +237,7 @@ def render(data: dict, config: dict) -> None:
         print(SEP.join([DOT.join(id_parts), *bars]))
         return
 
-    # ── Rows (default) / stacked: identity row + bar row(s) ──────────────
+    # ── Rows (default): identity row + bars row ──────────────────────────
     id_left = []
     if not is_claude:
         id_left.append(AGENT_BADGES.get(agent, agent))
@@ -248,14 +247,9 @@ def render(data: dict, config: dict) -> None:
 
     id_right = f"{DIM}{ident}{RESET}" if ident else ""
     line1 = f"{'  '.join(id_left)}   {id_right}".rstrip()
+    line2 = SEP.join(bars)
 
-    if layout == "stacked":
-        bar_lines = [b for b in bars if b.strip()]      # quota and context each on own row
-    else:                                                # "rows": quota + context together
-        joined = SEP.join(bars)
-        bar_lines = [joined] if joined.strip() else []
-
-    print("\n".join([line1, *bar_lines] if line1.strip() else bar_lines))
+    print("\n".join(l for l in (line1, line2) if l.strip()))
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
