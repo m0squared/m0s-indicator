@@ -236,8 +236,7 @@ def render(data: dict, config: dict) -> None:
             id_parts.append(model_seg)
         c, label = BADGES.get(plan, (DIM, plan.upper()))
         id_parts.append(f"{BOLD}{c}{label}{RESET}")
-        if ident:
-            id_parts.append(f"{DIM}{ident}{RESET}")
+        # Inline stays compact — no email/username (too long for one line).
 
         print(SEP.join([DOT.join(id_parts), *bars]))
         return
