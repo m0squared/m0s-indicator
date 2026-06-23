@@ -226,19 +226,38 @@ def render(data: dict, config: dict) -> None:
         if effort:
             model_seg += f" {DIM}({effort}){RESET}"
 
-    # ── Inline: single dot/pipe-separated line (time stays on the bar) ───
+    # ── Inline: plan · model · quota(↺ only) │ context ───────────────────
     if layout == "inline":
-        bars = build_bars(plan, rate, cost_obj, ctx, width, with_time=True)
-        id_parts = []
-        if not is_claude:
-            id_parts.append(AGENT_BADGES.get(agent, agent))
-        if model_seg:
-            id_parts.append(model_seg)
         c, label = BADGES.get(plan, (DIM, plan.upper()))
-        id_parts.append(f"{BOLD}{c}{label}{RESET}")
-        # Inline stays compact — no email/username (too long for one line).
+        parts = [f"{BOLD}{c}{label}{RESET}"]            # plan first (e.g. Max)
+        if not is_claude:
+            parts.append(AGENT_BADGES.get(agent, agent))
+        if model_seg:
+            parts.append(model_seg)
 
-        print(SEP.join([DOT.join(id_parts), *bars]))
+        # Quota with reset time only (no elapsed window), dot-joined.
+        if plan in ("pro", "max") and rate:
+            five      = rate.get("five_hour", {})
+            used_pct  = five.get("used_percentage")
+            resets_at = five.get("resets_at")
+            rem       = (100.0 - used_pct) if used_pct is not None else None
+            quota_str = f"Quota {color_remaining(rem)}{bar(rem, width)} {fmt_pct(rem)}{RESET}"
+            if resets_at:
+                quota_str += f"  {DIM}↺ {time_until(resets_at)}{RESET}"
+            parts.append(quota_str)
+        elif plan == "payg":
+            usd = float(cost_obj.get("total_cost_usd", 0) or 0)
+            parts.append(f"Cost {YELLOW}${usd:.4f}{RESET}")
+
+        line = DOT.join(parts)
+
+        # Context window, pipe-separated at the end.
+        ctx_pct = ctx.get("used_percentage")
+        if ctx_pct is not None:
+            cb = bar(ctx_pct, max(10, int(width * 0.75)))
+            line += f"{SEP}Ctx {color_used(ctx_pct)}{cb} {fmt_pct(ctx_pct)}{RESET}"
+
+        print(line)
         return
 
     # ── Rows (default): identity + window time on line 1, bars on line 2 ─
