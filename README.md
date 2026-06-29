@@ -9,7 +9,8 @@
 ---
 
 [![npm](https://img.shields.io/npm/v/m0squared-indicator?color=cyan&label=npm)](https://www.npmjs.com/package/m0squared-indicator)
-[![npm downloads](https://img.shields.io/npm/dm/m0squared-indicator?color=cyan)](https://www.npmjs.com/package/m0squared-indicator)
+[![npm downloads](https://img.shields.io/npm/dm/m0squared-indicator?color=cyan&label=downloads%2Fmonth)](https://www.npmjs.com/package/m0squared-indicator)
+[![npm downloads total](https://img.shields.io/npm/dt/m0squared-indicator?color=cyan&label=downloads%20total)](https://www.npmjs.com/package/m0squared-indicator)
 [![license](https://img.shields.io/badge/license-MIT-green)](#license)
 [![made with love](https://img.shields.io/badge/made%20with-%E2%9D%A4-red)](https://github.com/m0squared/m0s-indicator)
 [![built by a Claude Code lover](https://img.shields.io/badge/built%20by-Claude%20Code%20lover-blueviolet)](https://claude.ai/code)
