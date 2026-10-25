@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const python = require('../python');
 
 const HOME = os.homedir();
 const GEMINI_DIR = path.join(HOME, '.gemini');
@@ -49,7 +50,7 @@ function install(installDir) {
       {
         name: 'm0squared-tracker',
         type: 'command',
-        command: `python3 ${hookScript}`,
+        command: python.commandFor(hookScript),
         timeout: 5000,
       },
     ],

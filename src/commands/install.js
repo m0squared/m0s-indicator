@@ -2,28 +2,41 @@
 
 const fs = require('fs');
 const path = require('path');
-const os = require('os');
-const readline = require('readline');
 
 const ui = require('../ui');
+const python = require('../python');
 const { detectAll, getInstallDir } = require('../detect');
+const { pickLayout } = require('../layout-picker');
 
-// Ask the user once which HUD layout they want. Falls back to "rows" when
-// there's no TTY (e.g. the global-install postinstall hook).
-function promptLayout() {
-  return new Promise((resolve) => {
-    if (!process.stdin.isTTY || !process.stdout.isTTY) return resolve('rows');
+const AGENTS = {
+  'claude-code': require('../agents/claude-code'),
+  'codex': require('../agents/codex'),
+  'gemini': require('../agents/gemini'),
+};
 
-    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-    ui.section('Choose HUD layout:\n');
-    console.log(`    ${ui.CYAN}1${ui.R}  rows    ${ui.DIM}identity on one line, bars on the next (default)${ui.R}`);
-    console.log(`    ${ui.CYAN}2${ui.R}  inline  ${ui.DIM}everything on a single compact line${ui.R}\n`);
-    rl.question(`  ${ui.DIM}Select [1/2] (default 1): ${ui.R}`, (answer) => {
-      rl.close();
-      const a = (answer || '').trim().toLowerCase();
-      resolve(a === '2' || a === 'inline' ? 'inline' : 'rows');
-    });
-  });
+const AGENT_LABELS = {
+  'claude-code': 'Claude Code',
+  'codex': 'Codex CLI',
+  'gemini': 'Gemini CLI',
+};
+
+// Copy the Python runtime into ~/.m0squared/. Shared with `update`.
+function copyCoreFiles(installDir) {
+  fs.mkdirSync(path.join(installDir, 'hooks'), { recursive: true });
+
+  const indicatorSrc = path.join(__dirname, '../../core/indicator.py');
+  const indicatorDst = path.join(installDir, 'indicator.py');
+  fs.copyFileSync(indicatorSrc, indicatorDst);
+  fs.chmodSync(indicatorDst, '755');
+
+  for (const hookFile of ['codex-hook.py', 'gemini-hook.py']) {
+    const src = path.join(__dirname, '../../core/hooks', hookFile);
+    const dst = path.join(installDir, 'hooks', hookFile);
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dst);
+      fs.chmodSync(dst, '755');
+    }
+  }
 }
 
 // Merge a chosen layout into the installed config.json without clobbering
@@ -42,17 +55,20 @@ function writeLayout(installDir, layout) {
   fs.writeFileSync(configDst, JSON.stringify(cfg, null, 2) + '\n');
 }
 
-const AGENTS = {
-  'claude-code': require('../agents/claude-code'),
-  'codex': require('../agents/codex'),
-  'gemini': require('../agents/gemini'),
-};
-
-const AGENT_LABELS = {
-  'claude-code': 'Claude Code',
-  'codex': 'Codex CLI',
-  'gemini': 'Gemini CLI',
-};
+// Hard precondition: the HUD is a Python script, so refuse to touch anything
+// when no suitable interpreter exists. Returns the resolved interpreter.
+function requirePython() {
+  const py = python.findPython();
+  if (!py.argv) {
+    ui.error('Cannot install M0² Indicator.');
+    for (const line of python.requirementMessage(py)) ui.tip(line);
+    console.log();
+    process.exitCode = 1;
+    return null;
+  }
+  ui.info(`Python ${py.version.join('.')}  ${ui.DIM}(${py.argv.join(' ')} → ${py.executable})${ui.R}`);
+  return py;
+}
 
 module.exports = async function install(opts = {}) {
   ui.banner();
@@ -60,7 +76,17 @@ module.exports = async function install(opts = {}) {
   const installDir = getInstallDir();
   const targetAgent = opts.agent || null;
 
+  if (opts.layout && !['rows', 'inline'].includes(opts.layout)) {
+    ui.error(`Unknown layout "${opts.layout}". Use --layout rows or --layout inline.`);
+    process.exitCode = 1;
+    return;
+  }
+
+  ui.section('Checking requirements…\n');
+  if (!requirePython()) return;
+
   // Detect agents
+  console.log();
   ui.section('Scanning for AI agents…\n');
   const detected = detectAll();
 
@@ -82,7 +108,7 @@ module.exports = async function install(opts = {}) {
   if (toInstall.length === 0) {
     console.log();
     ui.info('Nothing to install — all detected agents already have M0².');
-    ui.tip('Run "npx m0squared update" to update to the latest version.');
+    ui.tip('Run "npx m0squared-indicator update" to refresh an existing install.');
     console.log();
     return;
   }
@@ -90,24 +116,7 @@ module.exports = async function install(opts = {}) {
   // Copy core files
   console.log();
   ui.section('Installing core files…');
-
-  fs.mkdirSync(path.join(installDir, 'hooks'), { recursive: true });
-
-  // Copy indicator.py
-  const indicatorSrc = path.join(__dirname, '../../core/indicator.py');
-  const indicatorDst = path.join(installDir, 'indicator.py');
-  fs.copyFileSync(indicatorSrc, indicatorDst);
-  fs.chmodSync(indicatorDst, '755');
-
-  // Copy hook scripts
-  for (const hookFile of ['codex-hook.py', 'gemini-hook.py']) {
-    const src = path.join(__dirname, '../../core/hooks', hookFile);
-    const dst = path.join(installDir, 'hooks', hookFile);
-    if (fs.existsSync(src)) {
-      fs.copyFileSync(src, dst);
-      fs.chmodSync(dst, '755');
-    }
-  }
+  copyCoreFiles(installDir);
 
   // Write default config if not exists
   const configDst = path.join(installDir, 'config.json');
@@ -118,11 +127,10 @@ module.exports = async function install(opts = {}) {
 
   // Let the user pick their HUD layout, then persist it into config.json.
   console.log();
-  const layout = await promptLayout();
+  const layout = opts.layout || await pickLayout('rows');
   writeLayout(installDir, layout);
 
   // Install per agent
-  console.log();
   ui.section(`Installing for: ${toInstall.map(n => AGENT_LABELS[n]).join(', ')}\n`);
 
   let anyFailed = false;
@@ -152,5 +160,10 @@ module.exports = async function install(opts = {}) {
     console.log();
   } else {
     ui.error('Some agents failed to install. Check the errors above.');
+    process.exitCode = 1;
   }
 };
+
+module.exports.copyCoreFiles = copyCoreFiles;
+module.exports.requirePython = requirePython;
+module.exports.AGENTS = AGENTS;

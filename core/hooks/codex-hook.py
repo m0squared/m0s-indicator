@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # © 2026 morius (M-zero-Squared). All rights reserved.
-# https://github.com/m0squared/m0squared
+# https://github.com/m0squared/m0s-indicator
 """
 M0² Codex CLI Hook — PostToolUse
 Reads the session transcript, calculates token usage,
@@ -11,6 +11,16 @@ import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+# Windows pipes default to the ANSI code page (cp1252), which cannot encode the
+# bar glyphs; the resulting UnicodeEncodeError used to be swallowed and the HUD
+# rendered as an empty line. Force UTF-8 on both ends regardless of platform.
+for _stream in (sys.stdin, sys.stdout):
+    if hasattr(_stream, "reconfigure"):
+        try:
+            _stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
 
 M0SQ_DIR   = Path.home() / ".m0squared"
 STATE_FILE  = M0SQ_DIR / "codex-state.json"

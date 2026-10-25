@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const python = require('../python');
 
 const HOME = os.homedir();
 const CODEX_DIR = path.join(HOME, '.codex');
@@ -13,8 +14,11 @@ function isInstalled() {
   try {
     if (!fs.existsSync(HOOKS_PATH)) return false;
     const h = JSON.parse(fs.readFileSync(HOOKS_PATH, 'utf8'));
-    const postHooks = h.PostToolUse || [];
-    return postHooks.some(h => JSON.stringify(h).includes('m0squared'));
+    // PostToolUse is an object keyed by matcher ({ "*": [...] }), so look
+    // through every matcher's hook list.
+    const post = h.PostToolUse || {};
+    const lists = Array.isArray(post) ? [post] : Object.values(post);
+    return lists.some(list => Array.isArray(list) && list.some(x => JSON.stringify(x).includes('m0squared')));
   } catch {
     return false;
   }
@@ -58,7 +62,7 @@ function install(installDir) {
   );
 
   hooks.PostToolUse['*'].push({
-    command: `python3 ${hookScript}`,
+    command: python.commandFor(hookScript),
     timeout: 5,
     statusMessage: 'M0² tracking tokens…',
   });

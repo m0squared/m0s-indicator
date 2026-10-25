@@ -3,21 +3,24 @@
 
 // © 2026 morius (M-zero-Squared). All rights reserved.
 // Free for personal use. No redistribution without permission.
-// https://github.com/m0squared/m0squared
+// https://github.com/m0squared/m0s-indicator
 
 const args = process.argv.slice(2);
 const ui = require('../src/ui');
 
-// Parse --agent flag
-let agentFlag = null;
-const agentIdx = args.indexOf('--agent');
-if (agentIdx !== -1 && args[agentIdx + 1]) {
-  agentFlag = args[agentIdx + 1];
+// Parse --agent / --layout flags (both `--flag value` and `--flag=value`)
+function flag(name) {
+  const eq = args.find(a => a.startsWith(`--${name}=`));
+  if (eq) return eq.slice(name.length + 3);
+  const i = args.indexOf(`--${name}`);
+  return i !== -1 && args[i + 1] ? args[i + 1] : null;
 }
+const agentFlag = flag('agent');
+const layoutFlag = flag('layout');
 
-const command = args.find(a => !a.startsWith('-') && a !== agentFlag);
+const command = args.find(a => !a.startsWith('-') && a !== agentFlag && a !== layoutFlag);
 
-const opts = { agent: agentFlag };
+const opts = { agent: agentFlag, layout: layoutFlag };
 
 switch (command) {
   case 'install':
@@ -46,12 +49,18 @@ switch (command) {
 
   case 'agents': {
     const { detectAll } = require('../src/detect');
+    const python = require('../src/python');
     const AGENTS = {
       'claude-code': require('../src/agents/claude-code'),
       'codex': require('../src/agents/codex'),
       'gemini': require('../src/agents/gemini'),
     };
     ui.banner();
+    const py = python.findPython();
+    ui.section('Requirements:\n');
+    if (py.argv) ui.info(`Python ${py.version.join('.')}  ${ui.DIM}(${py.argv.join(' ')})${ui.R}`);
+    else { ui.error('Python not found'); for (const l of python.requirementMessage(py)) ui.tip(l); }
+    console.log();
     ui.section('Agent status:\n');
     const detected = detectAll();
     for (const [name, agent] of Object.entries(AGENTS)) {
@@ -71,7 +80,7 @@ switch (command) {
   case '-v':
   case 'version': {
     const pkg = require('../package.json');
-    console.log(`m0squared v${pkg.version}`);
+    console.log(`m0squared-indicator v${pkg.version}`);
     break;
   }
 

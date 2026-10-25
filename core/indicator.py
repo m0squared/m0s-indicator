@@ -16,6 +16,16 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Windows pipes default to the ANSI code page (cp1252), which cannot encode the
+# bar glyphs; the resulting UnicodeEncodeError used to be swallowed and the HUD
+# rendered as an empty line. Force UTF-8 on both ends regardless of platform.
+for _stream in (sys.stdin, sys.stdout):
+    if hasattr(_stream, "reconfigure"):
+        try:
+            _stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 M0SQ_DIR    = Path.home() / ".m0squared"
 CONFIG_FILE  = M0SQ_DIR / "config.json"
 

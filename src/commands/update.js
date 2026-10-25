@@ -1,12 +1,14 @@
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
 
 const ui = require('../ui');
 const { getInstallDir } = require('../detect');
+const { copyCoreFiles, requirePython, AGENTS } = require('./install');
 
+// Refresh the Python runtime and rewrite each installed agent's command so an
+// older install (e.g. one that hard-coded `python3`) picks up the new
+// interpreter resolution. Agent install() is idempotent; config.json is left alone.
 module.exports = async function update() {
   ui.banner();
   ui.section('Updating M0²…\n');
@@ -14,32 +16,36 @@ module.exports = async function update() {
   const installDir = getInstallDir();
 
   if (!fs.existsSync(installDir)) {
-    ui.error('M0² is not installed. Run "npx m0squared install" first.');
+    ui.error('M0² is not installed. Run "npx m0squared-indicator install" first.');
+    process.exitCode = 1;
     return;
   }
 
-  // Copy fresh indicator.py
+  if (!requirePython()) return;
+  console.log();
+
   try {
-    const src = path.join(__dirname, '../../core/indicator.py');
-    const dst = path.join(installDir, 'indicator.py');
-    fs.copyFileSync(src, dst);
-    fs.chmodSync(dst, '755');
-
-    // Copy hook scripts
-    for (const hookFile of ['codex-hook.py', 'gemini-hook.py']) {
-      const hookSrc = path.join(__dirname, '../../core/hooks', hookFile);
-      const hookDst = path.join(installDir, 'hooks', hookFile);
-      if (fs.existsSync(hookSrc)) {
-        fs.mkdirSync(path.dirname(hookDst), { recursive: true });
-        fs.copyFileSync(hookSrc, hookDst);
-        fs.chmodSync(hookDst, '755');
-      }
-    }
-
-    ui.success('M0² updated to the latest version.');
-    ui.tip('Restart your AI agents to apply the update.');
-    console.log();
+    copyCoreFiles(installDir);
   } catch (e) {
     ui.error(`Update failed: ${e.message}`);
+    process.exitCode = 1;
+    return;
   }
+
+  let refreshed = 0;
+  for (const [name, agent] of Object.entries(AGENTS)) {
+    if (!agent.isInstalled()) continue;
+    ui.agentLine(name, 'installing');
+    try {
+      const result = agent.install(installDir);
+      if (result.ok) { ui.agentLine(name, 'done'); refreshed++; }
+      else ui.agentLine(name, 'error', result.error || 'unknown error');
+    } catch (e) {
+      ui.agentLine(name, 'error', e.message);
+    }
+  }
+
+  ui.success(`M0² updated (${refreshed} agent${refreshed === 1 ? '' : 's'} refreshed).`);
+  ui.tip('Restart your AI agents to apply the update.');
+  console.log();
 };

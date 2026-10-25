@@ -1,5 +1,7 @@
 'use strict';
 
+const pkg = require('../package.json');
+
 const R = '\x1b[0m';
 const BOLD = '\x1b[1m';
 const DIM = '\x1b[2m';
@@ -20,7 +22,7 @@ function banner() {
 ${BOLD}${WHITE}  ███╗   ███╗ ██████╗${R}${BOLD}${CYAN} ══╗${R}
 ${BOLD}${WHITE}  ████╗ ████║██╔═══██╗${R}${BOLD}${CYAN}╔═╝${R}
 ${BOLD}${WHITE}  ██╔████╔██║██║   ██║${R}${BOLD}${CYAN}╚══${R}  ${DIM}Universal AI Agent HUD${R}
-${BOLD}${WHITE}  ██║╚██╔╝██║╚██████╔╝${R}      ${DIM}v1.0.1  by haddad med${R}
+${BOLD}${WHITE}  ██║╚██╔╝██║╚██████╔╝${R}      ${DIM}v${pkg.version}  by haddad med${R}
 ${BOLD}${WHITE}  ╚═╝  ╚═╝  ╚═════╝${R}
 `);
 }
@@ -65,19 +67,20 @@ function tip(text) {
 
 function showHelp() {
   banner();
-  console.log(`  ${BOLD}Usage:${R}  npx m0squared <command>\n`);
+  console.log(`  ${BOLD}Usage:${R}  npx m0squared-indicator <command>\n`);
   console.log(`  ${BOLD}Commands:${R}`);
   console.log(`    ${CYAN}install${R}     Install M0² for all detected AI agents`);
   console.log(`    ${CYAN}uninstall${R}   Remove M0² from all agents`);
-  console.log(`    ${CYAN}update${R}      Update to the latest version`);
-  console.log(`    ${CYAN}status${R}      Show current token usage in terminal`);
-  console.log(`    ${CYAN}agents${R}      List supported agents and their status`);
+  console.log(`    ${CYAN}update${R}      Refresh the HUD files and agent wiring`);
+  console.log(`    ${CYAN}agents${R}      Show requirements, supported agents and their status`);
   console.log(`\n  ${BOLD}Options:${R}`);
   console.log(`    ${CYAN}--agent${R}     Target a specific agent (claude-code, codex, gemini)`);
+  console.log(`    ${CYAN}--layout${R}    Skip the picker: rows | inline`);
+  console.log(`\n  ${BOLD}Requires:${R}  Node.js 16+ and Python 3.10+ on your PATH`);
+  console.log(`  ${DIM}Works on macOS, Linux, WSL and native Windows (PowerShell / Git Bash).${R}`);
   console.log(`\n  ${DIM}Examples:${R}`);
-  console.log(`    npx m0squared install`);
-  console.log(`    npx m0squared install --agent claude-code`);
-  console.log(`    npx m0squared status\n`);
+  console.log(`    npx m0squared-indicator install`);
+  console.log(`    npx m0squared-indicator install --agent claude-code --layout inline\n`);
 }
 
 module.exports = { banner, section, agentLine, success, error, info, tip, showHelp, BOLD, DIM, GREEN, CYAN, YELLOW, RED, R };

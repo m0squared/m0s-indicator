@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # M0² — Universal AI Agent HUD
-# Curl installer: curl -sSL https://raw.githubusercontent.com/m0squared/m0squared/main/scripts/install.sh | bash
+# Curl installer: curl -sSL https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.sh | bash
 # © 2026 morius (M-zero-Squared). All rights reserved.
 
 set -euo pipefail
@@ -32,7 +32,9 @@ die()     { echo -e "  ${RED}✗${R}  $1"; exit 1; }
 
 # Check dependencies
 check_deps() {
-  command -v python3 >/dev/null 2>&1 || die "python3 is required but not found."
+  command -v python3 >/dev/null 2>&1 || die "Python 3.10+ is required but python3 was not found on PATH."
+  python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)' \
+    || die "Python 3.10+ is required (found $(python3 --version 2>&1))."
   command -v curl    >/dev/null 2>&1 || die "curl is required but not found."
 }
 
@@ -71,9 +73,11 @@ PYEOF
 # Detect installed agents
 detect_agents() {
   AGENTS=()
-  [ -d "${HOME}/.claude" ] || command -v claude >/dev/null 2>&1 && AGENTS+=("claude-code")
-  [ -d "${HOME}/.codex"  ] || command -v codex  >/dev/null 2>&1 && AGENTS+=("codex")
-  [ -d "${HOME}/.gemini" ] || command -v gemini >/dev/null 2>&1 && AGENTS+=("gemini")
+  # Explicit ifs: `a || b && c` one-liners abort the script under `set -e`
+  # when neither test passes.
+  if [ -d "${HOME}/.claude" ] || command -v claude >/dev/null 2>&1; then AGENTS+=("claude-code"); fi
+  if [ -d "${HOME}/.codex"  ] || command -v codex  >/dev/null 2>&1; then AGENTS+=("codex");  fi
+  if [ -d "${HOME}/.gemini" ] || command -v gemini >/dev/null 2>&1; then AGENTS+=("gemini"); fi
 }
 
 # Install Claude Code integration
@@ -81,7 +85,7 @@ install_claude_code() {
   local settings="${HOME}/.claude/settings.json"
   mkdir -p "${HOME}/.claude"
   patch_json "$settings" "statusLine" \
-    "{\"type\":\"command\",\"command\":\"python3 ${INSTALL_DIR}/indicator.py\"}"
+    "{\"type\":\"command\",\"command\":\"python3 \\\"${INSTALL_DIR}/indicator.py\\\"\"}"
   success "Claude Code"
 }
 

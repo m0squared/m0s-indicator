@@ -45,9 +45,19 @@ No more getting cut off mid-task. No more opening dashboards. No more guessing.
 
 ---
 
-## Install
+## Requirements
 
-Pick your method — they all do the same thing.
+| | |
+|---|---|
+| **Node.js** | 16 or newer (for the installer) |
+| **Python** | **3.10 or newer**, on your `PATH` (the HUD itself is a Python script) |
+| **OS** | macOS, Linux, WSL, and native Windows (PowerShell or Git Bash) |
+
+The installer checks for Python first and refuses to install without it — a HUD that can't run is worse than a clear error. On Windows, install Python from [python.org](https://www.python.org/downloads/windows/) (tick *"Add python.exe to PATH"*) or `winget install Python.Python.3.12`; the installer will pick `py -3`, `python` or `python3`, whichever actually works.
+
+---
+
+## Install
 
 ### npx *(recommended — no install needed)*
 ```bash
@@ -60,21 +70,12 @@ npm install -g m0squared-indicator
 m0squared-indicator install
 ```
 
-### pip
-```bash
-pip install m0squared-indicator
-m0squared-indicator install
-```
-
 ### curl *(Linux / macOS)*
 ```bash
 curl -sSL https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.sh | bash
 ```
 
-### PowerShell *(Windows)*
-```powershell
-irm https://raw.githubusercontent.com/m0squared/m0s-indicator/main/scripts/install.ps1 | iex
-```
+During install you pick the HUD layout with the arrow keys — **rows** (two lines) or **inline** (one line) — with a live preview of each. Use `--layout rows|inline` to skip the prompt, and `--agent claude-code|codex|gemini` to target one agent.
 
 ---
 
@@ -107,10 +108,13 @@ After install, a config file is created at `~/.m0squared/config.json`:
 | Key | Values | Description |
 |---|---|---|
 | `plan` | `auto` `pro` `max` `payg` `free` | Override plan auto-detection |
-| `bar_width` | number | Width of the progress bar (default: 20) |
+| `layout` | `rows` `inline` | HUD layout (chosen at install; edit here to change) |
+| `bar_width` | number | Width of the quota bar (default: 20) |
+| `username` / `email` | string | Override the identity shown |
+| `show_email` / `show_effort` | boolean | Toggle the email and the `(effort)` suffix |
 | `*.session_token_limit` | number | Token limit for Codex / Gemini sessions |
 
-> **Auto-detection:** Claude Code Pro/Max is detected automatically via the `rate_limits` field. Set `"plan": "max"` manually if you're on Max.
+> **Auto-detection:** the plan tier is read from your Claude account (`~/.claude.json`), so Pro and Max are both detected. Set `plan` only to override.
 
 ---
 
@@ -121,6 +125,14 @@ npx m0squared-indicator uninstall
 ```
 
 This removes all hooks from your agent configs and deletes `~/.m0squared/`.
+
+## Update
+
+```bash
+npx m0squared-indicator@latest update
+```
+
+Refreshes the HUD script and re-wires each installed agent (keeps your `config.json`).
 
 ---
 

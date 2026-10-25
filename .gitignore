@@ -1,0 +1,11 @@
+node_modules/
+
+# local agent-skill installs and generated video work (see CLAUDE.md)
+.agents/
+.claude/
+.bob/
+.aider-desk/
+skills-lock.json
+brag/
+brag-output*/
+video/

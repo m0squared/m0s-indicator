@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const python = require('../python');
 
 const HOME = os.homedir();
 const CLAUDE_DIR = path.join(HOME, '.claude');
@@ -36,7 +37,7 @@ function install(installDir) {
 
   settings.statusLine = {
     type: 'command',
-    command: `python3 ${scriptPath}`,
+    command: python.commandFor(scriptPath),
   };
 
   fs.writeFileSync(SETTINGS_PATH, JSON.stringify(settings, null, 2) + '\n');

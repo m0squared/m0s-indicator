@@ -1,0 +1,4 @@
+# Shell and Python scripts are executed on Linux/macOS/Git Bash: CRLF breaks bash outright
+# (the curl installer was broken by this) and corrupts #! lines. Keep them LF everywhere.
+*.sh text eol=lf
+*.py text eol=lf
