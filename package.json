@@ -1,7 +1,7 @@
 {
   "name": "m0squared-indicator",
-  "version": "1.0.10",
-  "description": "M0\u00b2 Indicator \u2014 Universal AI Agent Token Usage HUD for Claude Code, Codex CLI & Gemini CLI (needs Python 3.10+)",
+  "version": "1.1.0",
+  "description": "M0² Indicator — Universal AI Agent Token Usage HUD for Claude Code, Codex CLI & Gemini CLI (needs Python 3.10+)",
   "keywords": [
     "claude-code",
     "codex",
